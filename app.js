@@ -1,12 +1,12 @@
-Input: (intervals = [
-  [1, 3],
-  [6, 9],
-]),
-  (newInterval = [2, 5]);
-Output: [
-  [1, 5],
-  [6, 9],
-];
+//Input: (intervals = [
+//[1, 3],
+//[6, 9],
+//]),
+//(newInterval = [2, 5]);
+//Output: [
+//[1, 5],
+//[6, 9],
+//];
 
 const insert = function (intervals, newInterval) {
   let n = intervals.length,
@@ -30,4 +30,22 @@ const insert = function (intervals, newInterval) {
     i++;
   }
   return res;
+};
+
+//Input: s = "Hello World"
+//Output: 5
+//Explanation: The last word is "World" with length 5.
+
+const lengthOfLastWord = function (s) {
+  let p = s.length - 1;
+  while (p >= 0 && s[p] === " ") {
+    p--;
+  }
+
+  let length = 0;
+  while (p >= 0 && s[p] !== " ") {
+    p--;
+    length++;
+  }
+  return length;
 };
