@@ -100,3 +100,26 @@ const getPermutation = function (n, k) {
   }
   return output;
 };
+
+
+//Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+//Output: [[1,6],[8,10],[15,18]]
+//Explanation: Since intervals [1,3] and [2,6] overlap, merge them into 
+//[1,6].
+
+const overlap = function (a, b) {
+  return a[0] <= b[1] && b[0] <= a[1];
+};
+
+const buildGraph = function (intervals) {
+  const graph = new Map();
+  for (const i = 0; i < intervals.length; i++) {
+    for (const j = i + 1; j < intervals.length; j++) {
+      if (overlap(intervals[i], intervals[j])) {
+        if (graph.has(intervals[i])) {
+          
+        }
+      }
+    }
+  }
+}
