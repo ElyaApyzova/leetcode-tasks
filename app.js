@@ -148,3 +148,30 @@ const mergeNodes = function (nodes) {
 };
 
 
+const markComponentDFS = function (
+  start,
+  graph,
+  nodesInComp,
+  compNumber,
+  visited,
+) {
+  const stack = [start];
+  while (stack.length) {
+    const node = stack.pop();
+    if (!visited.has(node)) {
+      visited.add(node);
+      if (nodesInComp[compNumber]) {
+        nodesInComp[compNumber].push(node)
+      } else {
+        nodesInComp[compNumber] = [node];
+      }
+      if (graph.has(node)) {
+        for (let child of graph.get(node)) {
+          stack.push(child);
+        }
+      }
+    }
+  }
+};
+
+
