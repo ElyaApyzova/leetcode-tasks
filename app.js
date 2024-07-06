@@ -117,9 +117,34 @@ const buildGraph = function (intervals) {
     for (const j = i + 1; j < intervals.length; j++) {
       if (overlap(intervals[i], intervals[j])) {
         if (graph.has(intervals[i])) {
-          
+          graph.get(intervals[i]).push(intervals[j]);
+
+
+        } else {
+          graph.set(intervals[i], [intervals[j]]);
         }
+        if (graph.has(intervals[j])) {
+          graph.get(intervals[j]).push(intervals[i]);
+        
+        } else {
+          graph.set(intervals[j], [intervals[i]]);
+        }
+
       }
     }
   }
-}
+
+  return graph;
+};
+
+const mergeNodes = function (nodes) {
+  const minStart = Infinity;
+  const maxEnd = -Infinity;
+  for (let node of nodes) {
+    minStart = Math.min(minStart, node[0]);
+    maxEnd = Math.max(maxEnd, node[1]);
+  }
+  return [minStart, maxEnd];
+};
+
+
