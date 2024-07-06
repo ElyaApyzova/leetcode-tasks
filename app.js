@@ -174,4 +174,20 @@ const markComponentDFS = function (
   }
 };
 
-
+const merge = function (intervals) {
+  const graph = buildGraph(intervals);
+  const nodesInComp = {};
+  const visited = new Set();
+  const compNumber = 0;
+  for (let interval of intervals) {
+    if (!visited.has(interval)) {
+      markComponentDFS(interval, graph, nodesInComp, compNumber, visited);
+      compNumber++;
+    }
+  }
+  var merged = [];
+  for (var comp = 0; comp < compNumber; comp++) {
+    merged.push(mergeNodes(nodesInComp[comp]));
+  }
+  return merged;
+};
