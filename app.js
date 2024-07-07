@@ -194,6 +194,10 @@ const merge = function (intervals) {
 
 
 
+//Input: head = [0,1,2], k = 4
+//Output: [2,0,1]
+
+
 const rotateRight = function (head, k) {
   if (head == null) return null;
   if (head.next == null) return head;
@@ -210,4 +214,15 @@ const rotateRight = function (head, k) {
   new_tail.next = null;
   return new_head;
 
+};
+
+
+//Input: m = 3, n = 7
+//Output: 28
+
+const uniquePaths = function (m,n) {
+  if (m == 1 || n == 1) {
+    return 1;
+  }
+  return uniquePaths(m - 1, n) + uniquePaths(m, n - 1)
 };
