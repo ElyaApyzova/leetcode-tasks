@@ -262,6 +262,7 @@ const uniquePathsWithObstacles = function (obstacleGrid) {
   return obstacleGrid[R - 1][C - 1]
 };
 
+//https://leetcode.com/problems/minimum-path-sum/
 
 //Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
 //Output: 7
@@ -286,3 +287,41 @@ const minPathSum = function (grid) {
    }
    return dp[0][0];
 }
+
+
+// https://leetcode.com/problems/valid-number/
+
+//Input: s = "0"
+
+//Output: true
+
+
+const isNumber = function (s) {
+  const seenDigit = false;
+  const seenExponent = false;
+  const seenDot = false;
+  for (let i = 0; i < s.length; i++) {
+    let curr = s[i];
+    if (!isNaN(curr)) {
+      seenDigit = true;
+    } else if (curr == "+" || curr == "-") {
+      if (i > 0 && s[i - 1] != "e" && s[i - 1] != "E") {
+        return false;
+      }
+    } else if (curr == "e" || curr == "E") {
+      if (seenExponent || !seenDigit) {
+        return false;
+      }
+      seenExponent = true;
+      seenDigit = false;
+    } else if (curr == ".") {
+      if (seenDot || seenExponent) {
+        return false;
+      }
+      seenDot = true;
+    } else {
+      return false;
+    }
+  }
+  return seenDigit;
+};
