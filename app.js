@@ -261,3 +261,18 @@ const uniquePathsWithObstacles = function (obstacleGrid) {
   }
   return obstacleGrid[R - 1][C - 1]
 };
+
+
+//Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
+//Output: 7
+//Explanation: Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
+
+
+const minPathSum = function (grid) {
+  let dp = new Array(grid.length)
+   .fill()
+   .map(() => new Array(grid[0].length).fill(0));
+   for (let i = grid.length - 1; i >= 0; i--) {
+    
+   }
+}
