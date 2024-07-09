@@ -378,3 +378,15 @@ const addBinary = function (a, b) {
         if (carry === 1) result.push("1");
         return result.reverse().join("");
 };
+
+
+//https://leetcode.com/problems/text-justification/description/
+
+
+//Input: words = ["This", "is", "an", "example", "of", "text", "justification."], maxWidth = 16
+//Output:
+//[
+   //"This    is    an",
+   //"example  of text",
+   //"justification.  "
+//]
