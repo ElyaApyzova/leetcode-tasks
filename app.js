@@ -390,3 +390,15 @@ const addBinary = function (a, b) {
    //"example  of text",
    //"justification.  "
 //]
+
+
+const fullJustify = function (words, maxWidth) {
+  let ans = [];
+  let i = 0;
+  while (i < words.length) {
+    let currentLine = getWords(i, words, maxWidth);
+    i += currentLine.length;
+    ans.push(createLine(currentLine, i, words, maxWidth));
+  }
+  return ans;
+}
