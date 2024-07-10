@@ -412,4 +412,26 @@ const fullJustify = function (words, maxWidth) {
     }
     return currentLine;
   }
-}
+
+  function createLine(line, i, words, maxWidth) {
+    let baseLength = -1;
+    for (let word of line) {
+      baseLength += word.length + 1;
+    }
+    let extraSpaces = maxWidth - baseLength;
+    if (line.length === 1 || i === words.length) {
+      return line.join(" ") + " ".repeat(extraSpaces);
+    }
+    let wordCount = line.length - 1;
+    let spacesPerWord = Math.floor(extraSpaces / wordCount);
+
+    let needExtraSpace = extraSpaces % wordCount;
+    for (let j = 0; j < needsExtraSpace; j++) {
+      line[j] += " ";
+    }
+    for (let j = 0; j < wordCount; j++) {
+      line[j] += " ".repeat(spacesPerWord);
+    }
+    return line.join(" ");
+  }
+};
