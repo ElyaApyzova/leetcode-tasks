@@ -461,3 +461,27 @@ const mySqrt = function (x) {
       }
       return right;
 }
+
+//https://leetcode.com/problems/climbing-stairs/description/
+
+
+//Input: n = 2
+//Output: 2
+//Explanation: There are two ways to climb to the top.
+//1. 1 step + 1 step
+//2. 2 steps
+
+const climbStairs = function (n) {
+  return climb_Stairs(0, n);
+};
+
+const climb_Stairs = function (i, n) {
+  if (i > n) {
+    return 0;
+  }
+  if (i == n) {
+    return 1
+  }
+  return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
+};
+
