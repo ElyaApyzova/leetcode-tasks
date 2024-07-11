@@ -485,3 +485,15 @@ const climb_Stairs = function (i, n) {
   return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
 };
 
+
+//https://leetcode.com/problems/simplify-path/description/
+
+
+//Input: path = "/home/"
+
+//Output: "/home"
+
+//Explanation:
+
+//The trailing slash should be removed.
+
