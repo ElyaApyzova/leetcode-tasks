@@ -668,6 +668,50 @@ const sortColors = function (nums) {
 
 
 
+const  minWindow = function (s, t) {
+  if (s.length === 0 || t.length === 0) {
+    return "";
+  }
+
+  let dictT = new Map();
+  for (let i = 0; i < t.length; i++) {
+    let count = dictT.get(t.charAt(i)) || 0;
+    dictT.set(t.charAt(i), count + 1);
+  }
+
+  let required = dictT.size;
+  let l = 0,
+  r = 0;
+  let formed = 0;
+  let windowCounts = new Map();
+  let ans = [-1, 0, 0];
+  while (r < s.length) {
+    let c = s.charAt(r);
+    let count = windowCounts.get(c) || 0;
+    windowCounts.set(c, count + 1);
+    if (dictT.has(c) && windowCounts.get(c) === dictT.get(c)) {
+      formed++;
+    }
+    while (l <= r && formed === required) {
+      c = s.charAt(l);
+      if (ans[0] === -1 || r - l + 1 < ans[0]) {
+        ans[0] = r - l + 1;
+        ans[1] = l;
+        ans[2] = r;
+      }
+      windowCounts.set(c, windowCounts.get(c) - 1);
+      if (dictT.has(c) && windowCounts.get(c) < dictT.get(c)) {
+      
+      formed--;
+    }
+    l++;
+  }
+  r++;
+}
+return ans[0] === -1 ? "" : s.substring(ans[1], ans[2] + 1);
+}
+
+
 
 //https://leetcode.com/problems/combinations/
 
