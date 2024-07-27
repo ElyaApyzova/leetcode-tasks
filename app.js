@@ -745,6 +745,37 @@ const combine = function (n, k) {
 
 
 
+//https://leetcode.com/problems/subsets/description/
+
+
+
+//Input: nums = [1,2,3]
+//Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+
+
+
+const subsets = function (nums) {
+  let output = [];
+  let n = nums.length;
+  function backtrack(first = 0, curr = [], k) {
+    if (curr.length == k) {
+      output.push([...curr]);
+      return;
+    }
+    for (let i = first; i < n; i++) {
+      curr.push(nums[i]);
+      backtrack(i + 1, curr, k);
+      curr.pop();
+    }
+  }
+
+  for (let k = 0; k < n + 1; k++) {
+    backtrack(0, [], k);
+  }
+  return output;
+};
+
+
 
 
 
