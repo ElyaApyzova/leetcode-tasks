@@ -845,4 +845,50 @@ const removeDuplicates = function (nums) {
 };
 
 
+//81  https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+
+//Input: nums = [2,5,6,0,0,1,2], target = 0
+//Output: true
+
+
+const search = function (nums, target) {
+  let n = nums.length;
+  if (n == 0) return false;
+  let end = n - 1;
+  let start = 0;
+  while (start <= end) {
+    let mid = start + Math.floor((end - start) / 2);
+    if (nums[mid] == target) {
+      return true;
+    }
+    if (!isBinarySearchHelpful(nums, start, nums[mid] )) {
+      
+      start++;
+      continue;
+    }
+    let pivotArray = existsInFirst(nums, start, nums[mid]);
+    let targetArray = existsInFirst(nums, start, target);
+
+    if (pivotArray ^ targetArray) {
+      if (pivotArray) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+  }
+  return false;
+};
+
+function isBinarySearchHelpful(nums, start, element) {
+  return nums[start] != element;
+}
+
+function existsInFirst(nums, start, element) {
+  return nums[start] <= element;
+}
+
+
+
+
 
