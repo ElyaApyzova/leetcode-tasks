@@ -934,3 +934,29 @@ const delDuplicates = function (head) {
   }
   return head;
 };
+
+
+//84    https://leetcode.com/problems/largest-rectangle-in-histogram/
+
+
+//Input: heights = [2,1,5,6,2,3]
+//Output: 10
+//Explanation: The above is a histogram where width of each bar is 1.
+//The largest rectangle is shown in the red area, which has an area = 10 //units.
+
+
+
+const largestRectangleArea = function (heights) {
+  let max_area = 0;
+  for (let i = 0; i < heights.length; i++) {
+    for (let j = i; j < heights.length; j++) {
+      let min_height = Infinity;
+      for (let k = i; k <= j; k++) {
+        min_height = Math.min(min_height, heights[k]);
+      }
+      max_area = Math.max(max_area, min_height * (j - i + 1));
+    }
+  }
+  return max_area;
+};
+
