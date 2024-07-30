@@ -889,6 +889,27 @@ function existsInFirst(nums, start, element) {
 }
 
 
+//82   https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/
 
 
+//Input: head = [1,2,3,3,4,4,5]
+//Output: [1,2,5]
+
+
+const deleteDuplicates = function (head) {
+  let sentinel = new ListNode(0, head);
+  let pred = sentinel;
+  while (head !== null) {
+    if (head.next !== null && head.val === head.next.val) {
+      while (head.next !== null && head.val === head.next.val) {
+        head = head.next;
+      }
+      pred.next = head.next;
+    } else {
+      pred = pred.next;
+    }
+    head = head.next;
+  }
+  return sentinel.next;
+};
 
