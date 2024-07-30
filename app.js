@@ -913,3 +913,24 @@ const deleteDuplicates = function (head) {
   return sentinel.next;
 };
 
+
+
+//83   https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+
+
+// Input: head = [1,1,2]
+//Output: [1,2]
+
+
+
+const delDuplicates = function (head) {
+  let current = head;
+  while (current !== null && current.next !== null) {
+    if (current.next.val === current.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next;
+    }
+  }
+  return head;
+};
