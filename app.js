@@ -960,3 +960,32 @@ const largestRectangleArea = function (heights) {
   return max_area;
 };
 
+
+//85  https://leetcode.com/problems/maximal-rectangle/
+
+
+//Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1",//"1","1"],["1","0","0","1","0"]]
+//Output: 6
+//Explanation: The maximal rectangle is shown in the above picture.
+
+
+const maximalRectangle = function (matrix) {
+  if (matrix.length === 0)  return 0;
+  let maxarea = 0;
+  let dp = Array(matrix.length)
+    .fill(0)
+    .map(() => Array(matrix[0].length).fill(0));
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[0].length; j++) {
+        if (matrix[i][j] === "1") {
+          dp[i][j] = j === 0 ? 1 : dp[i][j - 1] + 1;
+          let width = dp[i][j];
+          for (let k = i; k >= 0; k--) {
+            width = Math.min(width, dp[k][j]);
+            maxarea = Math.max(maxarea, width * (i - k + 1));
+          }
+        }
+      }
+    }
+    return maxarea;
+};
