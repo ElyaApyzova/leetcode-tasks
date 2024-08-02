@@ -989,3 +989,32 @@ const maximalRectangle = function (matrix) {
     }
     return maxarea;
 };
+
+
+// 86   https://leetcode.com/problems/partition-list/
+
+
+
+//Input: head = [1,4,3,2,5,2], x = 3
+//Output: [1,2,2,4,3,5]
+
+
+const partition = function (head, x) {
+  let before_head = new ListNode(0);
+  let before = before_head;
+  let after_head = new ListNode(0);
+  let after = after_head;
+  while (head != null) {
+    if (head.val < x) {
+      before.next = head;
+      before = before.next;
+    } else {
+      after.next = head;
+      after = after.next;
+    }
+    head = head.next;
+  }
+  after.next = null;
+  before.next = after_head.next;
+  return before_head.next;
+};
