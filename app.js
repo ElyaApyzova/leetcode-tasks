@@ -1132,3 +1132,35 @@ const grayCode = function (n) {
   return res;
 };
 
+
+//90  https://leetcode.com/problems/subsets-ii/
+
+
+//Input: nums = [1,2,2]
+//Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+
+
+const subsetsWithDup = function ( nums) {
+  let n = nums.length;
+  nums.sort();
+  let subsets = [];
+  let seen = new Set();
+  let maxNumberOfSubsets = Math.pow(2, n);
+  for (let subsetIndex = 0; subsetIndex < maxNumberOfSubsets; subsetIndex++) {
+    let currentSubset = [];
+    let hashcode = "";
+    for (let j = 0; j < n; j++) {
+      let mask = 1 << j;
+      let isSet = mask & subsetIndex;
+      if (isSet != 0) {
+        currentSubset.push(nums[j]);
+        hashcode += nums[j] + ",";
+      }
+    }
+    if (!seen.has(hashcode)) {
+      subsets.push(currentSubset);
+      seen.add(hashcode);
+    }
+  }
+  return subsets;
+};
