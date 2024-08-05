@@ -1247,6 +1247,40 @@ const restoreIpAddresses = function (s) {
   }
 
   function helper(s, startIndex, dots, ans) {
-    
+    let remainingLength = s.length - startIndex;
+    let remainingNumberOfIntegers = 4 - dots.length;
+
+    if (
+      remainingLength > remainingNumberOfIntegers * 3 || remainingLength < remainingNumberOfIntegers
+    ) {
+      return;
+    }
+    if (dots.length == 3) {
+      if (valid(s, startIndex, remainingLength)) {
+        let temp = "";
+        let last = 0;
+        for (let dot of dots) {
+          temp += s.substring(last, last + dot) + ".";
+          last += dot;
+        }
+        temp += s.substring(startIndex);
+        ans.push(temp);
+      }
+      return;
+    }
+    for (
+      let curPos = 1;
+      curPos <= 3 && curPos <= remainingLength;
+      ++curPos
+
+    ) {
+      dots.push(curPos);
+      if (valid(s, startIndex, curPos)) {
+        helper(s, startIndex + curPos, dots, ans);
+      }
+      dots.pop();
+    }
   }
-}
+ helper(s, 0, [], ans);
+ return ans;
+};
