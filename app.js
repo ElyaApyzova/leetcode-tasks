@@ -1203,3 +1203,28 @@ const recursiveWithMemo = (index, str, memo) => {
   return ans;
 };
 
+
+//  92   https://leetcode.com/problems/reverse-linked-list-ii/description/
+
+//Input: head = [1,2,3,4,5], left = 2, right = 4
+//Output: [1,4,3,2,5]
+
+
+const reverseBetween = function (head, m, n) {
+  let left = head,
+    stop = false;
+    const recurseAndReverse = (right, m, n) => {
+      if (n == 1) return;
+      right = right.next;
+      if (m > 1) left = left.next;
+      recurseAndReverse(right, m - 1, n - 1);
+      if (left == right || right.next == left) stop = true;
+
+      if (!stop) {
+        [left.val, right.val] = [right.val, left.val];
+        left = left.next;
+      }
+    };
+    recurseAndReverse(head, m, n)
+    return head;
+};
