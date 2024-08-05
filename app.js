@@ -1228,3 +1228,25 @@ const reverseBetween = function (head, m, n) {
     recurseAndReverse(head, m, n)
     return head;
 };
+
+
+//93  https://leetcode.com/problems/restore-ip-addresses/description/
+
+
+//Input: s = "12"
+//Output: 2
+//Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
+
+
+const restoreIpAddresses = function (s) {
+  let ans = [];
+  function valid(s, start, length) {
+    return (
+      length == 1 || (s.charAt(start) != "0" && (length < 3 || s.substring(start, start + length) <= 255))
+    );
+  }
+
+  function helper(s, startIndex, dots, ans) {
+    
+  }
+}
