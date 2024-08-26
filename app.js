@@ -1306,3 +1306,40 @@ const helper = function (root, res) {
     helper(root.right, res);
   }
 };
+
+//95 https://leetcode.com/problems/unique-binary-search-trees-ii/
+
+//Input: n = 3
+//Output: [[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,//null,1]]
+
+
+const allPossibleBST = function (start, end, memo) {
+  let res = [];
+  if (start > end) {
+    res.push(null);
+    return res;
+  }
+
+  let key = start + "," + end;
+  if (memo[key] != undefined) {
+    return memo[key];
+  }
+  for (let i = start; i <= end; ++i) {
+    let leftSubTrees = allPossibleBST(start, i - 1, memo);
+
+    let rightSubTrees = allPossibleBST(i + 1, end, memo);
+
+    for (let j = 0; j < leftSubTrees.length; j++) {
+      for (let k = 0; k < rightSubTrees.length; k++) {
+        let root = new TreeNode(i, leftSubTrees[j], rightSubTrees[k]);
+        res.push(root);
+      }
+    }
+  }
+ memo[key] = res;
+ return res;
+};
+const generateTrees = function (n) {
+  let memo = {};
+  return allPossibleBST(1, n, memo);
+};
