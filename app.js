@@ -1284,3 +1284,25 @@ const restoreIpAddresses = function (s) {
  helper(s, 0, [], ans);
  return ans;
 };
+
+
+//https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+
+
+//Input: root = [1,null,2,3]
+//Output: [1,3,2]
+
+
+const inorderTraversal = function (root) {
+  let res = [];
+  helper(root, res);
+  returnres;
+};
+
+const helper = function (root, res) {
+  if (root !== null) {
+    helper(root.left, res);
+    res.push(root.val);
+    helper(root.right, res);
+  }
+};
