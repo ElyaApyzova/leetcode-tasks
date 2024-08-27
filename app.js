@@ -1362,3 +1362,38 @@ const numTrees = function (n) {
   }
   return G[n]
 };
+
+
+//97https://leetcode.com/problems/interleaving-string/description/
+
+//Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+//Output: true
+//Explanation: One way to obtain s3 is:
+//Split s1 into s1 = "aa" + "bc" + "c", and s2 into s2 = "dbbc" + "a".
+//Interleaving the two splits, we get "aa" + "dbbc" + "bc" + "a" + "c" = //"aadbbcbcac".
+
+
+
+const isInterleave = function (s1, s2, s3) {
+  if (s3.length !== s1.length + s2.length) {
+    return false;
+  }
+  const dp = Array.from({ length: s1.length + 1}, () => Array(s2.length + 1).fill(false),);
+
+  for (let i = 0; i <= s1.length; i++) {
+    for (let j = 0; j <= s2.length; j++) {
+      if (i === 0 && j === 0) {
+        dp[i][j] = true;
+      } else if (i === 0) {
+        dp[i][j] = dp[i][j - 1] && s2[j - 1] === s3[i + j - 1];
+      } else if (j === 0) {
+        dp[i][j] = dp[i - 1][j] && s1[i - 1] === s3[i + j - 1];
+      } else {
+        dp[i][j] =
+        (dp[i - 1][j] && s1[i - 1] === s3[i + j - 1]) || 
+        (dp[i][j - 1] && s2[j - 1] === s3[i + j -1]);
+      }
+    }
+  }
+  return dp[s1.length][s2.length];
+};
