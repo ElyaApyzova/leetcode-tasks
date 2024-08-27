@@ -1397,3 +1397,29 @@ const isInterleave = function (s1, s2, s3) {
   }
   return dp[s1.length][s2.length];
 };
+
+
+//98 https://leetcode.com/problems/validate-binary-search-tree/
+
+//Input: root = [2,1,3]
+//Output: true
+
+
+const isValidBST = function (root) {
+  let prev = -Infinity;
+  function inorder (node) {
+    if (!node) {
+      return true;
+    }
+    if (!inorder(node.left)) {
+      return false;
+    }
+    if (node.val <= prev) {
+      return false;
+    }
+    prev = node.val;
+    return inorder(node.right);
+  }
+  return inorder(root);
+};
+
