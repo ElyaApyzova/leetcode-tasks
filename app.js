@@ -1423,3 +1423,59 @@ const isValidBST = function (root) {
   return inorder(root);
 };
 
+
+
+//98 https://leetcode.com/problems/recover-binary-search-tree/description/
+
+
+//Input: root = [1,3,null,null,2]
+//Output: [3,1,null,null,2]
+//Explanation: 3 cannot be a left child of 1 because 3 > 1. Swapping 1 //and 3 makes the BST valid.
+
+
+const inorder = function (root, nums) {
+  if (!root) return;
+  inorder(root.left, nums);
+  nums.push(root.val);
+  inorder(root.right, nums);
+};
+
+
+const findTwoSwapped = function (nums) {
+  let n = nums.length;
+  let x = -1,
+      y = -1;
+      let swappedFirstOccurrence = false;
+
+      for (let i = 0; i < n - 1; ++i) {
+        if (nums[i + 1] < nums[i]) {
+          y = nums[i + 1];
+          if (!swappedFirstOccurrence) {
+            x = nums[i];
+            swappedFirstOccurrence = true;
+          } else {
+            break;
+          }
+        }
+      }
+
+      return [x, y];
+};
+
+const recover = function (r, count, x, y) {
+  if (r) {
+    if (r.val === x || r.val === y) {
+      r.val = r.val === x ? y : x;
+      if (--count === 0) return;
+    }
+    recover(r.left, count, x, y);
+    recover(r.right, count, x, y);
+  }
+};
+
+const recoverTree = function (root) {
+  let nums = [];
+  inorder(root, nums);
+  let swapped = findTwoSwapped(nums);
+  recover(root, 2, swapped[0], swapped[1]);
+};
