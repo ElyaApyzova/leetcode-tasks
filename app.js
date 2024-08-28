@@ -1425,7 +1425,7 @@ const isValidBST = function (root) {
 
 
 
-//98 https://leetcode.com/problems/recover-binary-search-tree/description/
+//99 https://leetcode.com/problems/recover-binary-search-tree/description/
 
 
 //Input: root = [1,3,null,null,2]
@@ -1478,4 +1478,19 @@ const recoverTree = function (root) {
   inorder(root, nums);
   let swapped = findTwoSwapped(nums);
   recover(root, 2, swapped[0], swapped[1]);
+};
+
+
+
+//100 https://leetcode.com/problems/same-tree/description/
+
+//Input: p = [1,2,3], q = [1,2,3]
+//Output: true
+
+
+const isSameTree = function (p, q) {
+  if (p == null && q == null) return true;
+  if (q == null || p == null) return false;
+  if (p.val != q.val) return false;
+  return isSameTree(p.right, q.right) && isSameTree(p.left, q.left);;
 };
