@@ -1513,3 +1513,23 @@ const isMirror = function (t1, t2) {
     t1.val === t2.val && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right)
   );
 };
+
+//102 https://leetcode.com/problems/binary-tree-level-order-traversal/
+
+//Input: root = [3,9,20,null,null,15,7]
+//Output: [[3],[9,20],[15,7]]
+
+
+const  levelOrder = function (root) {
+  let levels = [];
+  function helper(node, level) {
+    if (levels.length === level) levels.push([]);
+    levels[level].push(node.val);
+    if (node.left !== null) helper(node.left, level + 1);
+    if (node.right !== null) helper(node.right, level + 1);
+  }
+
+  if (root !== null) helper(root, 0);
+  return levels;
+};
+
