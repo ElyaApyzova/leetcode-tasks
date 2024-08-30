@@ -8,6 +8,8 @@
 //[6, 9],
 //];
 
+const { TreeNode } = require("antd/es/tree-select");
+
 const insert = function (intervals, newInterval) {
   let n = intervals.length,
     i = 0;
@@ -1587,3 +1589,27 @@ const maxDepth = function (root) {
   return 1 + Math.max(left_height, right_height);
 };
 
+
+//105 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+
+//Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+//Output: [3,9,20,null,null,15,7]
+
+const buildTree = function (preorder, inorder) {
+  let preorderIndex = 0;
+  let inorderIndexMap = new Map();
+
+  for (let i = 0; i < inorder.length; i++) {
+    inorderIndexMap.set(inorder[i], i);
+  }
+
+  function arrayToTree(left, right) {
+    if (left > right) return null;
+    let rootValue = preorder[preorderIndex++];
+    let root = new TreeNode(rootValue);
+    root.left = arrayToTree(left, inorderIndexMap.get(rootValue) - 1);
+    root.right = arrayToTree(inorderIndexMap.get(rootValue) + 1, right);
+    return root;
+  }
+  return arrayToTree(0, preorder.length - 1);
+};
