@@ -1662,3 +1662,26 @@ const levelOrderBottom = function (root) {
 
 
 
+//108 https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+
+//  Input: nums = [-10,-3,0,5,9]
+//Output: [0,-3,9,-10,null,5]
+//Explanation: [0,-10,5,null,-3,null,9] is also accepted:
+
+
+
+const sortedArrayToBST = function (num) {
+  return helper(nums, 0, nums.length - 1);
+};
+
+const helpers = function (nums, left, right) {
+  if (left > right) {
+    return null;
+  }
+
+  const p = Math.floor((left + right) / 2);
+  const root = new TreeNode(nums[p], null, null);
+  root.left = helpers(nums, left, p - 1);
+  root.right = helpers(nums, p + 1, right);
+  return root;
+};
