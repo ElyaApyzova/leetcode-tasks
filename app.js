@@ -1640,3 +1640,25 @@ const constructTree = function (inorder, postorder) {
 };
 
 
+
+// 107 https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
+
+// Input: root = [3,9,20,null,null,15,7]
+//Output: [[15,7],[9,20],[3]]
+
+const levelOrderBottom = function (root) {
+  let levels = [];
+  function helper(node, level) {
+    if (!node) return;
+    if (!levels[level]) levels[level] = [];
+    levels[level].push(node.val);
+    if (node.left) helper(node.left, level + 1);
+    if (node.right) helper(node.right, level + 1);
+  }
+  helper(root, 0);
+  return levels.reverse();
+};
+
+
+
+
