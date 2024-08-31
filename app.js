@@ -1613,3 +1613,30 @@ const buildTree = function (preorder, inorder) {
   }
   return arrayToTree(0, preorder.length - 1);
 };
+
+
+// 106 https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+
+
+// Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+//Output: [3,9,20,null,null,15,7]
+
+
+const constructTree = function (inorder, postorder) {
+  const idx_map = {};
+  const post_idx = postorder.length - 1;
+  const helper = function (in_left, in_right) {
+    if (in_left > in_right) return null;
+    const root_val = postorder[post_idx];
+    const root = new TreeNode(root_val);
+    const index = idx_map[root_val];
+    post_idx--;
+    root.right = helper(index + 1, in_right);
+    root.left = helper(in_left, index - 1);
+    return root;
+  };
+  for (let i = 0; i < inorder.length; i++) idx_map[inorder[i]] = i;
+  return helper(0, inorder.length - 1);
+};
+
+
