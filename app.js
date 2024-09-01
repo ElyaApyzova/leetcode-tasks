@@ -1731,4 +1731,31 @@ const findMiddleElement = function(head) {
   return slowPtr;
 };
 
+// 110  https://leetcode.com/problems/balanced-binary-tree/
+
+
+//  Input: root = [3,9,20,null,null,15,7]
+//Output: true
+
+
+const height = function (root) {
+  if (root == null) {
+    return -1;
+  }
+  return 1 + Math.max(height(root.left), height(root.right));
+};
+
+const isBalanced = function (root) {
+  if (root == null) {
+    return true;
+  }
+  return (
+    Math.abs(height(root.left) - height(root.right)) < 2 &&
+
+    isBalanced(root.left) &&
+    isBalanced(root.right)
+  );
+};
+
+
 
