@@ -1685,3 +1685,50 @@ const helpers = function (nums, left, right) {
   root.right = helpers(nums, p + 1, right);
   return root;
 };
+
+
+// 109   https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
+
+
+//Input: head = [-10,-3,0,5,9]
+//Output: [0,-3,9,-10,null,5]
+//Explanation: One possible answer is [0,-3,9,-10,null,5], which //represents the shown height balanced BST.
+
+
+function ListNode (val, next) {
+  this.val = (val === undefined ? 0 : val);
+  this.next = (next === undefined ? null : next);
+}
+
+function TreeNode(val, left, right) {
+  this.val = (val === undefined ? 0 : val);
+  this.left = (left === undefined ? null : left);
+  this.right = (right === undefined ? null : right);
+}
+
+const sortedListToBST = function(head) {
+  if (!head) return null;
+  const mid = findMiddleElement(head);
+  const node = new TreeNode(mid.val);
+  if (head === mid) return node;
+  node.left = sortedListToBST(head);
+  node.right = sortedListToBST(mid.next);
+  return node;
+};
+
+
+const findMiddleElement = function(head) {
+  const prevPtr = null;
+  const slowPtr = head;
+  const fastPtr = head;
+  while (fastPtr && fastPtr.next) {
+    prevPtr = slowPtr;
+    slowPtr = slowPtr.next;
+    fastPtr = fastPtr.next.next;
+  }
+
+  if (prevPtr != null) prevPtr.next = null;
+  return slowPtr;
+};
+
+
