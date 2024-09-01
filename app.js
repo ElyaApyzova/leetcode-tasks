@@ -1757,5 +1757,27 @@ const isBalanced = function (root) {
   );
 };
 
+// 111 https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
+
+//  Input: root = [3,9,20,null,null,15,7]
+//Output: 2
+
+const minDepth = function (root) {
+  function dfs(root) {
+    if (root === null) {
+      return 0;
+    }
+    if (root.left === null) {
+      return 1 + dfs(root.right);
+    } else if (root.right === null) {
+      return 1 + dfs(root.left);
+    }
+    return 1 + Math.min(dfs(root.left), dfs(root.right));
+  }
+  return dfs(root);
+
+};
+
+
 
 
