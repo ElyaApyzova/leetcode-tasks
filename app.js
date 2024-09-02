@@ -1812,5 +1812,50 @@ const hasPathSum = function (root, sum) {
 };
 
 
+// 113 https://leetcode.com/problems/path-sum-ii/description/
+
+
+//Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+//Output: [[5,4,11,2],[5,8,4,5]]
+//Explanation: There are two paths whose sum equals targetSum:
+//5 + 4 + 11 + 2 = 22
+//5 + 8 + 4 + 5 = 22
+
+
+const pathSum = function (root, sum) {
+  let pathList = [];
+  let pathNodes = [];
+  let recurseTree = function (node, remainingSum, pathNodes, pathList) {
+    if (!node) {
+      return;
+    }
+    pathNodes.push(node.val);
+    if (
+      remainingSum === node.val && 
+      node.left === null &&
+      node.right === null
+    ) {
+      pathList.push(Array.from(pathNodes));
+    } else {
+      recurseTree(
+        node.left,
+        remainingSum - node.val,
+        pathNodes,
+        pathList,
+      );
+      recurseTree(
+        node.right,
+        remainingSum - node.val,
+        pathNodes,
+        pathList
+      );
+    }
+    pathNodes.pop();
+  };
+  recurseTree(root, sum, pathNodes, pathList);
+  return pathList;
+};
+
+
 
 
