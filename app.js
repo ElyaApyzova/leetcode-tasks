@@ -1856,6 +1856,32 @@ const pathSum = function (root, sum) {
   return pathList;
 };
 
+// 114 https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+//Input: root = [1,2,5,3,4,null,6]
+//Output: [1,null,2,null,3,null,4,null,5,null,6]
+
+const flattenTree = function (node) {
+  if (node == null) {
+    return null;
+  }
+  if (node.left == null && node.right == null) {
+    return node;
+  }
+  let leftTail = flattenTree(node.left);
+  let rightTail = flattenTree(node.right);
+  if (leftTail != null) {
+    leftTail.right = node.right;
+    node.right = node.left;
+    node.left = null;
+  }
+  return rightTail == null ? leftTail : rightTail;
+};
+const flatten = function (root) {
+  flattenTree(root);
+};
+
+
 
 
 
