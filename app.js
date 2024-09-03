@@ -1879,7 +1879,94 @@ const flattenTree = function (node) {
 };
 const flatten = function (root) {
   flattenTree(root);
+ 
 };
+
+
+
+
+//115 https://leetcode.com/problems/distinct-subsequences/
+
+//Input: s = "rabbbit", t = "rabbit"
+//Output: 3
+//Explanation:
+//As shown below, there are 3 ways you can generate "rabbit" from s.
+//rabbbit
+//rabbbit
+//rabbbit
+
+
+const numDistinct = function (s, t) {
+  let memo = new Map();
+  function dp(i, j) {
+    if (i === s.length || j === t.length || s.length - i < t.length - j)
+      return j === t.length ? 1 : 0;
+
+    let key = [i, j].toString();
+    if (memo.has(key)) return memo.get(key);
+    let ans = dp(i + 1, j);
+    if (s[i] === t[j]) ans += dp(i + 1, j + 1);
+    memo.set(key, ans);
+    return ans;
+  }
+  return dp(0, 0);
+};
+
+
+// 116 https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+
+
+//struct Node {
+  //int val;
+  //Node *left;
+  //Node *right;
+  //Node *next;
+//}
+
+//Input: root = [1,2,3,4,5,6,7]
+//Output: [1,#,2,3,#,4,5,6,7,#]
+//Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as //connected by the next pointers, with '#' signifying the end of each //level.
+
+
+//while (!Q.empty())
+//{
+  //size = Q.size()
+  //for i in range 0..size
+ // {
+      //node = Q.pop()
+      //Q.push(node.left)
+      //Q.push(node.right)
+  //}
+//}
+
+
+const connect = function (root) {
+  if (root == null) {
+    return root;
+  }
+
+  let Q = [];
+  Q.push(root);
+  while (Q.length > 0) {
+    let size = Q.length;
+    for (let i = 0; i < size; i++) {
+      let node = Q.shift();
+      if (i < size - 1) {
+        node.next = Q[0];
+      }
+      if (node.left != null) {
+        Q.push(node.left);
+      }
+      if (node.right != null) {
+        Q.push(node.right);
+      }
+    }
+  }
+  return root;
+};
+
+
+
 
 
 
