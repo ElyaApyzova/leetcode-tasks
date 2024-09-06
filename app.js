@@ -2018,6 +2018,27 @@ const generate = function (numRows) {
 }
 
 
+// 119  https://leetcode.com/problems/pascals-triangle-ii/editorial/
+
+
+//Input: rowIndex = 3
+//Output: [1,3,3,1]
+
+
+const getNum = function (row, col) {
+  if (row === 0 || col === 0 || row === col) {
+    return 1;
+  }
+  return getNum(row - 1, col - 1) + getNum(row - 1, col);
+};
+
+const getRow = function (rowIndex) {
+  let ans = [];
+  for (let i = 0; i <= rowIndex; i++) {
+    ans.push(getNum(rowIndex, i));
+  }
+  return ans;
+};
 
 
 
