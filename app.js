@@ -2041,6 +2041,37 @@ const getRow = function (rowIndex) {
 };
 
 
+//120 https://leetcode.com/problems/triangle/description/
+
+
+//Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+//Output: 11
+//Explanation: The triangle looks like:
+   //2
+  //3 4
+ //6 5 7
+//4 1 8 3
+//The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 //(underlined above).
+
+
+const minimumTotal = function (triangle) {
+  for (let row = 1; row < triangle.length; row++) {
+    for (let col = 0; col <= row; col++) {
+      let smallestAbove = Number.MAX_VALUE;
+      if (col > 0) {
+        smallestAbove = triangle[row - 1][col - 1];
+      }
+      if (col < row) {
+        smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
+      }
+      triangle[row][col] += smallestAbove;
+    }
+  }
+  return Math.min(...triangle[triangle.length - 1]);
+};
+
+
+
 
 
 
