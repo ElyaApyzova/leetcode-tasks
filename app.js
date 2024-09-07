@@ -2119,6 +2119,38 @@ const maxBestProfit = function (prices) {
 };
 
 
+//123  https://leetcode.com/problems/binary-tree-maximum-path-sum/
+
+//Input: prices = [3,3,5,0,0,3,1,4]
+//Output: 6
+//Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), //profit = 3-0 = 3.
+//Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = //4-1
+
+
+const maxPathProfit = function (prices) {
+  if (prices.length <= 1) return 0;
+  let left_min = prices[0];
+  let right_max = prices[prices.length - 1];
+  let length = prices.length;
+  let left_profits = new Array(length).fill(0);
+  let right_profits = new Array(length + 1).fill(0);
+  for (let l = 1; l < length; ++l) {
+    left_profits[l] = Math.max(left_profits[l - 1], prices[l] - left_min);
+    left_min = Math.min(left_min, prices[l]);
+    let r = length - 1 - l;
+    right_profits[r] = Math.max(right_profits[r + 1], right_max - prices[r],);
+    right_max = Math.max(right_max, prices[r]);
+  }
+  let max_profit = 0;
+  for (let i = 0; i < length; ++i) {
+    max_profit = Math.max(max_profit,
+      left_profits[i] + right_profits[i + 1],
+    );
+  }
+  return max_profit;
+};
+
+
 
 
 
