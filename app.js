@@ -2291,6 +2291,28 @@ const ladderLength = function (beginWord, endWord, wordList) {
   return 0;
 };
 
+//128 https://leetcode.com/problems/longest-consecutive-sequence/description/
+
+// Input: nums = [100,4,200,1,3,2]
+//Output: 4
+//Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. //Therefore its length is 4.
+
+
+const longestConsecutive = function (nums) {
+  let longestStreak = 0;
+  for (let num of nums) {
+    let currentNum = num;
+    let currentStreak = 1;
+    while (nums.includes(currentNum + 1)) {
+      currentNum += 1;
+      currentStreak += 1;
+    }
+    longestStreak = Math.max(longestStreak, currentStreak);
+  }
+  return longestStreak;
+};
+
+
 
 
 
