@@ -2250,6 +2250,48 @@ const findLadders = function(beginWord, endWord, wordList) {
   return shortestPaths;
 };
 
+//127 https://leetcode.com/problems/word-ladder/
+
+
+//Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot",//"dog","lot","log","cog"]
+//Output: 5
+//Explanation: One shortest transformation sequence is "hit" -> "hot" -> //"dot" -> "dog" -> cog", which is 5 words long.
+
+
+const ladderLength = function (beginWord, endWord, wordList) {
+  let L = beginWord.length;
+  let allComboDict = {};
+  for (let word of wordList) {
+    for (let i = 0; i < L; i++) {
+      let newWord = word.substring(0, i) + "*" + word.substring(i + 1, L);
+      if (!allComboDict[newWord]) allComboDict[newWord] = [];
+
+      allComboDict[newWord].push(word);
+    }
+  }
+  let Q = [[beginWord, 1]];
+  let visited = { [beginWord]: true };
+  while (Q.length > 0) {
+    let node = Q.shift();
+    let word = node[0];
+    let level = node[1];
+    for (let i = 0; i < L; i++) {
+      let newWord = word.substring(0, i) + "*" + word.substring(i + 1, L);
+      for (let adjacentWord of allComboDict[newWord] || []) {
+        if (adjacentWord === endWord) {
+          return level + 1;
+        }
+        if (!visited[adjacentWord]) {
+          visited[adjacentWord] = true;
+          Q.push([adjacentWord, level + 1]);
+        }
+      }
+    }
+  }
+  return 0;
+};
+
+
 
 
 
