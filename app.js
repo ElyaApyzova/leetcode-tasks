@@ -2185,6 +2185,70 @@ function isLetterOrDigit(character) {
   );
 }
 
+// 126 https://leetcode.com/problems/word-ladder-ii/
+
+//Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot",//"dog","lot","log","cog"]
+//Output: [["hit","hot","dot","dog","cog"],["hit","hot","lot","log",//"cog"]]
+//Explanation: There are 2 shortest transformation sequences:
+//"hit" -> "hot" -> "dot" -> "dog" -> "cog"
+//"hit" -> "hot" -> "lot" -> "log" -> "cog"
+
+
+const findLadders = function(beginWord, endWord, wordList) {
+  let adjList = {};
+  let currPath = [endWord];
+  let shortestPaths = [];
+  let wordSet = new Set(wordList);
+
+  function findNeighbors(word) {
+    let neighbors = [];
+    let charList = Array.from(word);
+    for (let i = 0; i < charList.length; i++) {
+      let oldChar = charList[i];
+      for (let c = 'a'.charCodeAt(0); c <= 'z'.charCodeAt(0); c++) {
+        if (c !== oldChar.charCodeAt(0)) {
+          charList[i] = String.fromCharCode(c);
+          let newWord = charList.join("");
+          if (wordSet.has(newWord)) neighbors.push(newWord);
+        }
+      }
+      charList[i] = oldChar;
+    }
+    return neighbors;
+  }
+
+  function backtrack(source) {
+    if (source === endWord) {
+      shortestPaths.push([...currPath].reverse());
+      return;
+    }
+    adjList[source]?.forEach(neighbor => {
+      currPath.push(neighbor);
+      backtrack(neighbor);
+      currPath.pop();
+    });
+  }
+  function bfs() {
+    let queue = [beginWord];
+    wordSet.delete(beginWord);
+    while (queue.length) {
+      let current = queue.shift();
+      let neighbors = findNeighbors(current);
+      neighbors.forEach(neighbor => {
+        if (!adjList[neighbor]) adjList[neighbor] = [];
+
+        adjList[neighbor].push(current);
+        if (!wordSet.has(neighbor)) {
+          queue.push(neighbor);
+          wordSet.delete(neighbor);
+        }
+      });
+    }
+  }
+  bfs();
+  backtrack(beginWord);
+  return shortestPaths;
+};
 
 
 
