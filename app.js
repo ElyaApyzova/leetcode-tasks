@@ -2418,6 +2418,14 @@ const Partition = function (s) {
 };
 
 
+//132 https://leetcode.com/problems/palindrome-partitioning-ii/
+
+// Input: s = "aab"
+//Output: 1
+//Explanation: The palindrome partitioning ["aa","b"] could be produced //using 1 cut.
+
+
+
 
 
 
