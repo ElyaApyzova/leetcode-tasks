@@ -2313,6 +2313,32 @@ const longestConsecutive = function (nums) {
 };
 
 
+//129 https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+
+
+//Input: root = [1,2,3]
+//Output: 25
+//Explanation:
+//The root-to-leaf path 1->2 represents the number 12.
+//The root-to-leaf path 1->3 represents the number 13.
+//Therefore, sum = 12 + 13 = 25.
+
+
+function sumNumbers(root, partialSum = 0) {
+  if (!root) {
+    return 0;
+  }
+  partialSum = partialSum * 10 + root.val;
+  if (!root.left && !root.right) {
+    return partialSum;
+  }
+  return (
+    sumNumbers(root.left, partialSum) + sumNumbers(root.right, partialSum)
+  );
+}
+
+
+
 
 
 
