@@ -2454,6 +2454,39 @@ const Palindrome = function (s, start, end) {
 };
 
 
+// 133 https://leetcode.com/problems/clone-graph/description/
+
+
+//Input: adjList = [[2,4],[1,3],[2,4],[1,3]]
+//Output: [[2,4],[1,3],[2,4],[1,3]]
+//Explanation: There are 4 nodes in the graph.
+//1st node (val = 1)'s neighbors are 2nd node (val = 2) and 4th node (val //= 4).
+//2nd node (val = 2)'s neighbors are 1st node (val = 1) and 3rd node (val //= 3).
+//3rd node (val = 3)'s neighbors are 2nd node (val = 2) and 4th node (val //= 4).
+//4th node (val = 4)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+
+
+const cloneGraph = function (node) {
+  if (node === null) return node;
+  const visited = new Map();
+  const queue = [node];
+  visited.set(node, {val: node.val, neighbors: []});
+
+  while (queue.length > 0) {
+    const n = queue.shift();
+    n.neighbors.forEach((neighbor) => {
+      if (!visited.has(neighbor)) {
+        visited.set(neighbor, {val: neighbor.val, neighbors: []});
+        queue.push(neighbor);
+      }
+      visited.get(n).neighbors.push(visited.get(neighbor));
+    });
+  }
+  return visited.get(node);
+};
+
+
+
 
 
 
