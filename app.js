@@ -2517,6 +2517,31 @@ const canCompleteCircuit = function (gas, cost) {
 };
 
 
+//135 https://leetcode.com/problems/candy/
+
+//Input: ratings = [1,0,2]
+//Output: 5
+//Explanation: You can allocate to the first, second and third child with //2, 1, 2 candies respectively.
+
+
+const candy = function (ratings) {
+  let sum = 0;
+  let len = ratings.length;
+  let left2right = new Array(len).fill(1);
+  let right2left = new Array(len).fill(1);
+  for (let i = 1; i < len; i++) {
+    if (ratings[i] > ratings[i - 1]) {
+      left2right[i] = left2right[i + 1] + 1;
+    }
+  }
+  for (let i = 0; i < len; i++) {
+    sum += Math.max(left2right[i], right2left[i]);
+  }
+  return sum;
+};
+
+
+
 
 
 
