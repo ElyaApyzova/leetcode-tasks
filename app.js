@@ -2425,6 +2425,33 @@ const Partition = function (s) {
 //Explanation: The palindrome partitioning ["aa","b"] could be produced //using 1 cut.
 
 
+const minCut = function (s) {
+  return findMinimumCut(s, 0, s.length - 1, s.length - 1);
+};
+
+const findMinimumCut = function (s, start, end, minimumCut) {
+  if (start === end || Palindrome(s, start, end)) {
+    return 0;
+  }
+  for (let currentEndIndex = start; currentEndIndex <= end; currentEndIndex++) {
+    if (Palindrome(s, start, currentEndIndex)) {
+      minimumCut = Math.min(
+        minimumCut,
+        1 + findMinimumCut(s, currentEndIndex + 1, end, minimumCut),
+      );
+    }
+  }
+  return minimumCut;
+};
+
+const Palindrome = function (s, start, end) {
+  while (start < end) {
+    if (s[start++] !== s[end--]) {
+      return false;
+    }
+  }
+  return true;
+};
 
 
 
