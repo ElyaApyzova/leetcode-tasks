@@ -2541,6 +2541,27 @@ const candy = function (ratings) {
 };
 
 
+//136 https://leetcode.com/problems/single-number-ii/
+
+
+//Input: nums = [2,2,3,2]
+//Output: 3
+
+
+const singleNumber = function (nums) {
+  nums.sort();
+  for (let i = 0; i < nums.length - 1; i += 3) {
+    if (nums[i] == nums[i + 1]) {
+      continue;
+    } else {
+      return nums[i];
+    }
+  }
+  return nums[nums.length - 1];
+};
+
+
+
 
 
 
