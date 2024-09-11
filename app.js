@@ -2561,6 +2561,39 @@ const singleNumber = function (nums) {
 };
 
 
+//138 https://leetcode.com/problems/copy-list-with-random-pointer/
+
+
+//Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+//Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+
+function Node(val, next, random) {
+  this.val = val;
+  this.next = next;
+  this.random = random;
+}
+
+const copyRandomList = function (head) {
+  let visitedHash = new Map();
+  let cloneNode = function (node) {
+    if (node === null) {
+      return null;
+    }
+    if (visitedHash.has(node)) {
+      return visitedHash.get(node);
+    }
+    let newNode = new Node(node.val, null, null);
+    visitedHash.set(node, newNode);
+    newNode.next = cloneNode(node.next);
+    newNode.random = cloneNode(node.random);
+    return newNode;
+  };
+  return cloneNode(head);
+};
+
+
+
 
 
 
