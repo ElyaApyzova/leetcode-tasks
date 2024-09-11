@@ -2620,6 +2620,39 @@ const wordBreak = function (s, wordDict) {
 };
 
 
+//140 https://leetcode.com/problems/word-break-ii/
+
+
+//Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+//Output: ["cats and dog","cat sand dog"]
+
+
+
+class Solution {
+  wordBreak(s, wordDict) {
+    const wordSet = new Set(wordDict);
+    const results = [];
+    this._backtrack(s, wordSet, [], results, 0);
+    return results;
+  }
+
+  _backtrack(s, wordSet, currentSentence, results, startIndex) {
+    if (startIndex === s.length) {
+      results.push(currentSentence.join(" "));
+      return;
+    }
+    for (let endIndex = startIndex + 1; endIndex <= s.length; endIndex++) {
+      const word = s.substring(startIndex, endIndex);
+      if (wordSet.has(word)) {
+        currentSentence.push(word);
+        this._backtrack(s, wordSet, currentSentence, results, endIndex);
+        currentSentence.pop();
+      }
+    }
+  }
+}
+
+
 
 
 
