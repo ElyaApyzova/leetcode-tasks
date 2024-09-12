@@ -2705,6 +2705,42 @@ const detectCycle = function(head) {
 };
 
 
+// 143 https://leetcode.com/problems/reorder-list/
+
+//Input: head = [1,2,3,4]
+//Output: [1,4,2,3]
+
+
+const reorderList = function (head) {
+  if (head === null) return;
+  let slow = head;
+  let fast = head;
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  let prev = null;
+  let curr = slow;
+  while (curr !== null) {
+    let tmp = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = tmp;
+  }
+  let first = head;
+  let second = prev;
+  while (second.next !== null) {
+    let tmp = first.next;
+    first.next = second;
+    first = tmp;
+    tmp = second.next;
+    second.next = first;
+    second = tmp;
+  }
+};
+
+
+
 
 
 
