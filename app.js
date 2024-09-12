@@ -2740,6 +2740,38 @@ const reorderList = function (head) {
 };
 
 
+//144 https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+
+// Input: root = [1,null,2,3]
+//Output: [1,2,3]
+
+
+const preorderTraversal = function (root) {
+  if (!root) {
+    return [];
+  }
+
+  const stack = [root];
+  const output = [];
+
+  while (stack.length != 0) {
+    root = stack.pop();
+    if (root) {
+      output.push(root.val);
+      if (root.right) {
+        stack.push(root.right);
+      }
+      if (root.left) {
+        stack.push(root.left);
+      }
+    }
+  }
+  return output;
+};
+
+
+
 
 
 
