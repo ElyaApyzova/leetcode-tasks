@@ -2677,6 +2677,34 @@ const hasCycle = function (head) {
 
 
 
+//142 https://leetcode.com/problems/linked-list-cycle-ii/
+
+
+//Input: head = [3,2,0,-4], pos = 1
+//Output: tail connects to node index 1
+//Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+
+function ListNode(val, next) {
+  this.val = (val === undefined ? 0 : val);
+  this.next = (next === undefined ? null : next);
+}
+
+const detectCycle = function(head) {
+  let nodesSeen = new Set();
+  let node = head;
+  while (node !== null) {
+    if (nodesSeen.has(node)) {
+      return node;
+    } else {
+      nodesSeen.add(node);
+      node = node.next;
+    }
+  }
+  return null;
+};
+
+
 
 
 
