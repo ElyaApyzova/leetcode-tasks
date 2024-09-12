@@ -2654,6 +2654,28 @@ class Solution {
 
 
 
+//141 https://leetcode.com/problems/linked-list-cycle/
+
+
+//Input: head = [3,2,0,-4], pos = 1
+//Output: true
+//Explanation: There is a cycle in the linked list, where the tail 
+
+
+const hasCycle = function (head) {
+  let nodesSeen = new Set();
+  let current = head;
+  while (current != null) {
+    if (nodesSeen.has(current)) {
+      return true;
+    }
+    nodesSeen.add(current);
+    current = current.next;
+  }
+  return false;
+};
+
+
 
 
 
