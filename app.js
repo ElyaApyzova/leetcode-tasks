@@ -2772,6 +2772,31 @@ const preorderTraversal = function (root) {
 
 
 
+//145 https://leetcode.com/problems/binary-tree-postorder-traversal/
+
+
+//Input: root = [1,null,2,3]
+//Output: [3,2,1]
+
+
+const postorderTraversal = function (root) {
+  let output = [];
+  let stack = [];
+  if (root === null) return output;
+  stack.push(root);
+  while (stack.length > 0) {
+    root = stack.pop();
+    output.push(root.val);
+    if (root.left !== null) stack.push(root.left);
+    if (root.right !== null) stack.push(root.right);
+  }
+  output.reverse();
+  return output;
+};
+
+
+
+
 
 
 
