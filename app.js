@@ -2865,3 +2865,26 @@ class LRUCache {
 
 
 
+//147 https://leetcode.com/problems/insertion-sort-list/
+
+
+//Input: head = [4,2,1,3]
+//Output: [1,2,3,4]
+
+
+var insertionSortList = function (head) {
+  let dummy = new ListNode();
+  let curr = head;
+  while (curr !== null) {
+      let prev = dummy;
+      while (prev.next !== null && prev.next.val <= curr.val) {
+          prev = prev.next;
+      }
+      let next = curr.next;
+      curr.next = prev.next;
+      prev.next = curr;
+      curr = next;
+  }
+  return dummy.next;
+};
+
