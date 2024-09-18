@@ -3005,3 +3005,18 @@ const evalRPN = function (tokens) {
   }
   return tokens[0];
 };
+
+
+
+//151 https://leetcode.com/problems/reverse-words-in-a-string/
+
+
+//Input: s = "the sky is blue"
+//Output: "blue is sky the"
+
+
+const reverseWords = function (s) {
+  s = s.trim();
+  let words = s.split(/\s+/).reverse();
+  return words.join(" ");
+};
