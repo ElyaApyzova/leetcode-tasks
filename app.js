@@ -3020,3 +3020,26 @@ const reverseWords = function (s) {
   let words = s.split(/\s+/).reverse();
   return words.join(" ");
 };
+
+
+//152 https://leetcode.com/problems/maximum-product-subarray/
+
+//Input: nums = [2,3,-2,4]
+//Output: 6
+//Explanation: [2,3] has the largest product 6.
+
+
+const maxProduct = function (nums) {
+  if (nums.length === 0) return 0;
+
+  let result = nums[0];
+
+  for (let i = 0; i < nums.length; i++) {
+    let accu = 1;
+    for (let j = i; j < nums.length; j++) {
+      accu *= nums[j];
+      result = Math.max(result, accu);
+    }
+  }
+  return result;
+};
