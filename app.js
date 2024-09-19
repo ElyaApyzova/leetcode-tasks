@@ -3152,3 +3152,36 @@ class MinStack {
     return last(this._stack)[1];
   }
 }
+
+
+//156 https://leetcode.com/problems/read-n-characters-given-read4/
+
+// Input: file = "abc", n = 4
+//Output: 3
+//Explanation: After calling your read method, buf should contain "abc". We read a total of 3 characters from the file, so return 3.
+//Note that "abc" is the file's content, not buf. buf is the destination buffer that you will have to write the results to.
+
+
+class Reader4 {
+  read4(buf4) {
+    return 0;
+  }
+}
+
+class Solution extends Reader4 {
+  read(buf, n) {
+    let copiedChars = 0, readChars = 4;
+    let buf4 = new Array(4).fill('\0');
+
+    while (copiedChars < n && readChars === 4) {
+      readChars = this.read4(buf4);
+
+      for (let i = 0; i < readChars; ++i) {
+        if (copiedChars === n) return copiedChars;
+        buf[copiedChars] = buf4[i];
+        ++copiedChars;
+      }
+    }
+    return copiedChars;
+  }
+}
