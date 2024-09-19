@@ -3098,3 +3098,57 @@ const findMinim = function (nums) {
   }
   return nums[low];
 };
+
+
+//155 https://leetcode.com/problems/min-stack/description/
+
+
+//Input
+//["MinStack","push","push","push","getMin","pop","top","getMin"]
+//[[],[-2],[0],[-3],[],[],[],[]]
+
+//Output
+//[null,null,null,null,-3,null,0,-2]
+
+//Explanation
+//MinStack minStack = new MinStack();
+//minStack.push(-2);
+//minStack.push(0);
+//minStack.push(-3);
+//minStack.getMin(); // return -3
+//minStack.pop();
+//minStack.top();    // return 0
+//minStack.getMin(); // return -2
+
+
+
+
+function last(arr) {
+  return arr[arr.length - 1];
+}
+
+class MinStack {
+  _stack = [];
+
+  push(x) {
+    if (this._stack.length === 0) {
+      this._stack.push([x, x]);
+      return;
+    }
+
+    const currentMin = last(this._stack)[1];
+    this._stack.push([x, Math.min(currentMin, x)]);
+  }
+
+  pop() {
+    this._stack.pop();
+  }
+
+  top() {
+    return last(this._stack)[0];
+  }
+
+  getMin() {
+    return last(this._stack)[1];
+  }
+}
