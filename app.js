@@ -3238,3 +3238,24 @@ const isOneEditDistance = function (s, t) {
       else return s.slice(i) === t.slice(i + 1);
       return ns + 1 === nt;
 };
+
+
+//162 https://leetcode.com/problems/find-peak-element/
+
+
+//Input: nums = [1,2,3,1]
+//Output: 2
+//Explanation: 3 is a peak element and your function should return the index number 2.
+
+
+const findPeakElement = function (nums) {
+  return search(nums, 0, nums.length - 1);
+};
+
+const searches = function (nums, l, r) {
+  if (l == r) return l;
+  let mid = Math.floor((l + r) / 2);
+  if (nums[mid] > nums[mid + 1]) return searches(nums, l, mid);
+
+  return searches(nums, mid + 1, r);
+};
