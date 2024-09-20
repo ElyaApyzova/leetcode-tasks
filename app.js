@@ -3215,3 +3215,26 @@ const getIntersectionNode = function (headA, headB) {
   }
   return null;
 };
+
+
+//161 https://leetcode.com/problems/one-edit-distance/description/
+
+
+//Input: s = "ab", t = "acb"
+//Output: true
+//Explanation: We can insert 'c' into s to get t.
+
+
+const isOneEditDistance = function (s, t) {
+  let ns = s.length;
+  let nt = t.length;
+  if (ns > nt) return isOneEditDistance(t, s);
+  if (nt - ns > 1) return false;
+
+  for (let i = 0; i < ns; i++)
+    if (s[i] != t[i])
+      if (ns == nt) 
+        return s.slice(i + 1) === t.slice(i + 1);
+      else return s.slice(i) === t.slice(i + 1);
+      return ns + 1 === nt;
+};
