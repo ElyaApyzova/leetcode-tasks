@@ -3295,3 +3295,28 @@ const findMissingRanges = function (nums, lower, upper) {
   return missingRanges;
 };
 
+
+
+//164 https://leetcode.com/problems/maximum-gap/
+
+
+//  Input: nums = [3,6,9,1]
+//Output: 3
+//Explanation: The sorted form of the array is [1,3,6,9], either (3,6) or (6,9) has the maximum difference 3.
+
+
+const maximumGap = function (nums) {
+  if (nums == null || nums.length < 2)
+    return 0;
+
+  nums.sort((a, b) => a - b)
+
+  let maxGap = 0;
+
+  for (let i = 0; i < nums.length - 1; i++)
+    maxGap = Math.max(nums[i + 1] - nums[i], maxGap);
+
+  return maxGap;
+};
+
+
