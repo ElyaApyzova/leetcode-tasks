@@ -3348,3 +3348,43 @@ const compareVersion = function (version1, version2) {
 
 
 
+//166 https://leetcode.com/problems/fraction-to-recurring-decimal/description/
+
+
+//Input: numerator = 1, denominator = 2
+//Output: "0.5"
+
+
+
+const fractionToDecimal = function (numerator, denominator) {
+  if (numerator === 0) {
+    return "0";
+  }
+
+  let fraction = [];
+  if ((numerator < 0) ^ (denominator < 0)) {
+    fraction.push("-");
+  }
+
+  let dividend = Math.abs(numerator);
+  let divisor = Math.abs(denominator);
+  fraction.push(Math.floor(dividend / divisor).toString());
+  let remainder = dividend % divisor;
+  if (remainder === 0) {
+    return fraction.join("");
+  }
+  fraction.push(".");
+  let map = {};
+  while (remainder !== 0) {
+    if (remainder in map) {
+      fraction.splice(map[remainder], 0, "(");
+      fraction.push(")");
+      break;
+    }
+    map[remainder] = fraction.length;
+    remainder *= 10;
+    fraction.push(Math.floor(remainder / divisor).toString());
+    remainder %= divisor;
+  }
+  return fraction.join("");
+};
