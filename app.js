@@ -3433,3 +3433,27 @@ const convertToTitle = function (columnNumber) {
   return ans;
 };
 
+
+//169 https://leetcode.com/problems/majority-element/
+
+
+//Input: nums = [3,2,3]
+//Output: 3
+
+
+const majorityElement = function (nums) {
+  let counts = {};
+
+  for (let num of nums) {
+    if (!counts[num]) {
+      counts[num] = 1;
+    } else {
+      counts[num]++;
+    }
+  }
+
+  for (let num in counts) {
+    if (counts[num] > nums.length / 2) return Number(num);
+  }
+  return 0;
+};
