@@ -3544,3 +3544,62 @@ const trailingZeroes = function (n) {
 
   return zeroCount;
 };
+
+
+//173 https://leetcode.com/problems/binary-search-tree-iterator/description/
+
+
+//Input
+//["BSTIterator", "next", "next", "hasNext", "next", "hasNext", "next", "hasNext", "next", "hasNext"]
+//[[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
+//Output
+//[null, 3, 7, true, 9, true, 15, true, 20, false]
+
+//Explanation
+//BSTIterator bSTIterator = new BSTIterator([7, 3, 15, null, null, 9, 20]);
+//bSTIterator.next();    // return 3
+//bSTIterator.next();    // return 7
+//bSTIterator.hasNext(); // return True
+//bSTIterator.next();    // return 9
+//bSTIterator.hasNext(); // return True
+//bSTIterator.next();    // return 15
+//bSTIterator.hasNext(); // return True
+//bSTIterator.next();    // return 20
+//bSTIterator.hasNext(); // return False
+
+
+
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BSTIterator {
+  constructor(root) {
+    this.nodesSorted = [];
+    this.index = -1;
+    this._inorder(root);
+  }
+
+  _inorder(root) {
+    if (root === null) {
+      return;
+    }
+
+    this._inorder(root.left);
+    this.nodesSorted.push(root.val);
+    this._inorder(root.right);
+  }
+
+  next() {
+    return this.nodesSorted[++this.index];
+  }
+
+  hasNext() {
+    return this.index + 1 < this.nodesSorted.length;
+  }
+}
