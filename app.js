@@ -3497,7 +3497,7 @@ class TwoSum {
   }
 }
 
-// https://leetcode.com/problems/excel-sheet-column-number/
+//171 https://leetcode.com/problems/excel-sheet-column-number/
 
 //Input: columnTitle = "A"
 //Output: 1
@@ -3520,3 +3520,27 @@ const titleToNumber = function (s) {
 };
 
 
+//172  Factorial Trailing Zeroes
+
+
+//Input: n = 3
+//Output: 0
+//Explanation: 3! = 6, no trailing zero.
+
+
+const trailingZeroes = function (n) {
+  let nFactorial = BigInt(1);
+  for (let i = 2; i <= n; i++) {
+    nFactorial *= BigInt(i);
+  }
+
+  let zeroCount = 0;
+  const ten = BigInt(10);
+
+  while (nFactorial % ten === BigInt(0)) {
+    nFactorial /= ten;
+    zeroCount++;
+  }
+
+  return zeroCount;
+};
