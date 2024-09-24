@@ -3718,3 +3718,28 @@ class Solution {
     return strNums.join('');
   }
 }
+
+
+
+//186 https://leetcode.com/problems/reverse-words-in-a-string-ii/
+
+
+//Input: s = ["a"]
+//Output: ["a"]
+
+
+class Solution {
+  reverseWords(s) {
+    s.reverse();
+    let start = 0, end = 0, n = s.length;
+
+
+    while (start < n) {
+      while (end < n && s[end] !== ' ') end++;
+      s.slice(start, end).reverse().copyWithin(s, start);
+
+      end++;
+      start = end;
+    }
+  }
+}
