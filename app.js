@@ -3649,3 +3649,55 @@ const calculateMinimumHP = function (dungeon) {
   }
   return dp[0][0];
 };
+
+
+
+// 174 https://leetcode.com/problems/dungeon-game/description/
+
+
+//Input: dungeon = [[-2,-3,3],[-5,-10,1],[10,30,-5]]
+//Output: 7
+//Explanation: The initial health of the knight must be at least 7 if he follows the optimal path
+
+
+
+class MyCircularQueue {
+  constructor(capacity) {
+    this.queue = new Array(capacity).fill(0);
+    this.index = 0;
+  }
+
+  enQueue(value) {
+    this.queue[this.index] = value;
+    this.index = (this.index + 1) % this.queue.length;
+  }
+
+  get(index) {
+    return this.queue[index % this.queue.length];
+  }
+}
+
+function calculateMinimumHP(dungeon) {
+  const rows = dungeon.length;
+  const cols = dungeon[0].length;
+  const dp = new MyCircularQueue(cols);
+  const inf = Infinity;
+
+  for (let row = rows - 1; row >= 0; --row) {
+    for (let col = cols - 1; col >= 0; --col) {
+      const currCell = dungeon[row][col];
+      const rightHealth = col < cols - 1 ? Math.max(1, dp.get(col + 1) - currCell) : inf;
+
+      const downHealth = row < rows - 1 ? Math.max(1, dp.get(col) - currCell) : inf;
+
+      const minHealth = rightHealth === inf && downHealth === inf ? 1 : Math.min(rightHealth, downHealth);
+
+      dp.enQueue(currCell >= 0 ? minHealth : minHealth - currCell);
+    }
+  }
+
+  return dp.get(0);
+};
+
+
+
