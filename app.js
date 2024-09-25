@@ -3743,3 +3743,23 @@ class Solution {
     }
   }
 }
+
+
+
+//187 https://leetcode.com/problems/repeated-dna-sequences/
+
+//Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
+//Output: ["AAAAACCCCC","CCCCCAAAAA"]
+
+
+class Solution {
+  largestNumber(nums) {
+      const strNums = nums.map(String);
+      strNums.sort((a, b) => (b + a).localeCompare(a + b));
+      if (strNums[0] === "0") {
+          return "0";
+      }
+      return strNums.join('');
+  }
+}
+
