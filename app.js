@@ -3763,3 +3763,46 @@ class Solution {
   }
 }
 
+
+//188 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+
+
+//Input: k = 2, prices = [2,4,1]
+//Output: 2
+//Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.
+
+
+class Solution {
+  maxProfit(k, prices) {
+    const n = prices.length;
+    if (n === 0 || k === 0) return 0;
+    if (k * 2 >= n) {
+      let res = 0;
+      for  (let i = 1; i < n; i++) {
+        res += Math.max(0, prices[i] - prices[i - 1]);
+      }
+      return res;
+    }
+
+    const dp = Array.from({ length: n}, () => 
+      Array.from({ length: k + 1}, () =>
+        Array(2).fill(Number.MIN_SAFE_INTEGER / 2) 
+      )
+      
+    );
+    dp[0][0][0] = 0;
+    dp[0][1][1] = -prices[0];
+
+    for (let i = 1; i < n; i++) {
+      for (let j = 0; j <= k; j++) {
+        dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
+        if (j > 0) {
+          dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i -1][j -1][0] - prices[i]);
+        }
+      }
+    }
+    return Math.max(...dp[n - 1].map(x => x[0]));
+  }
+}
+
+
