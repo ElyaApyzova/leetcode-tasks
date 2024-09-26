@@ -3834,4 +3834,38 @@ class Solution {
 }
 
 
+//190 https://leetcode.com/problems/reverse-bits/
+
+//Input: n = 00000010100101000001111010011100
+//Output:    964176192 (00111001011110000010100101000000)
+//Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000.
+//Example 2:
+
+
+class Solution {
+  constructor() {
+    this.cache = {};
+  }
+
+  reverseByte(byte) {
+    if (this.cache[byte] !== undefined) {
+      return this.cache[byte];
+    }
+    let value = (byte * 0x0202020202 & 0x010884422010) % 1023;
+
+    this.cache[byte] = value;
+    return value;
+  }
+
+  reverseBits(n) {
+    let ret = 0, power = 24;
+    while (n !== 0) {
+      ret += this.reverseByte(n & 0xff) << power;
+      n = n >>> 8;
+      power -= 8;
+    }
+    return ret;
+  }
+}
+
 
