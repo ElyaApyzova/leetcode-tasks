@@ -3806,3 +3806,32 @@ class Solution {
 }
 
 
+//189 https://leetcode.com/problems/rotate-array/
+
+
+// Input: nums = [1,2,3,4,5,6,7], k = 3
+//Output: [5,6,7,1,2,3,4]
+//Explanation:
+//rotate 1 steps to the right: [7,1,2,3,4,5,6]
+//rotate 2 steps to the right: [6,7,1,2,3,4,5]
+//rotate 3 steps to the right: [5,6,7,1,2,3,4]
+
+
+
+class Solution {
+  rotate(nums, k) {
+    const n = nums.length;
+    const a = new Array(n);
+
+    for (let i = 0; i < n; i++) {
+      a[(i + k) % n] = nums[i];
+    }
+
+    for (let i = 0; i < n; i++) {
+      nums[i] = a[i];
+    }
+  }
+}
+
+
+
