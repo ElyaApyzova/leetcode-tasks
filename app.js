@@ -3869,3 +3869,29 @@ class Solution {
 }
 
 
+//191 https://leetcode.com/problems/number-of-1-bits/
+
+
+//Input: n = 11
+
+//Output: 3
+
+//Explanation:
+
+//The input binary string 1011 has a total of three set bits.
+
+
+function hammingWeight(n) {
+  let bits = 0;
+  let mask = 1;
+  for (let i = 0; i < 32; i++) {
+    if ((n & mask) !== 0) {
+      bits++;
+    }
+    mask <<= 1;
+  }
+  return bits;
+}
+
+
+
