@@ -3894,4 +3894,39 @@ function hammingWeight(n) {
 }
 
 
+//198 https://leetcode.com/problems/house-robber/
+
+
+//Input: nums = [1,2,3,1]
+//Output: 4
+//Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+//Total amount you can rob = 1 + 3 = 4.
+
+
+class Solution {
+  constructor() {
+    this.memo = [];
+  }
+
+  rob(nums) {
+    this.memo = Array(100).fill(-1);
+    return this.robFrom(0, nums);
+  }
+
+  robFrom(i, nums) {
+    if (i >= nums.length) {
+      return 0;
+    }
+    if (this.memo[i] !== -1) {
+      return this.memo[i];
+    }
+
+    const ans = Math.max(this.robFrom(i + 1, nums), this.robFrom(i + 2, nums) + nums[i]);
+    this.memo[i] = ans;
+    return ans;
+  }
+}
+
+
+
 
