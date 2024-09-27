@@ -3928,5 +3928,38 @@ class Solution {
 }
 
 
+//199 https://leetcode.com/problems/binary-tree-right-side-view/description/
+
+
+//Input: root = [1,2,3,null,5,null,4]
+//Output: [1,3,4]
+
+
+class Solution {
+  rightSideView(root) {
+    if (root === null) return [];
+
+    let nextLevel = [root];
+    let rightside = [];
+
+    while (nextLevel.length > 0) {
+      let currLevel = nextLevel;
+      nextLevel = [];
+
+
+      for (let node of currLevel) {
+        if (node.left !== null)
+         nextLevel.push(node.left);
+        if (node.right !== null)
+          nextLevel.push(node.right); 
+      }
+      rightside.push(currLevel[currLevel.length - 1].val);
+    }
+    return rightside;
+  }
+}
+
+
+
 
 
