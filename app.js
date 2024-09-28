@@ -4011,6 +4011,27 @@ class Solution {
 }
 
 
+//201 Bitwise AND of Numbers Range
+
+
+//Input: left = 5, right = 7
+//Output: 4
+
+
+class Solution {
+  rangeBitwiseAnd(m, n) {
+    let shift = 0;
+    while (m < n) {
+      m >>= 1;
+      n >>= 1;
+      shift++;
+    }
+    return m << shift;
+  }
+}
+
+
+
 
 
 
