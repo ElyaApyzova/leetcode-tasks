@@ -3960,6 +3960,58 @@ class Solution {
 }
 
 
+// 200 Number of Islands
+
+
+//Input: grid = [
+  //["1","1","1","1","0"],
+  //["1","1","0","1","0"],
+  //["1","1","0","0","0"],
+  //["0","0","0","0","0"]
+//]
+//Output: 1
+
+
+class Solution {
+  dfs(grid, r, c) {
+    const nr = grid.length;
+    const nc = grid[0].length;
+
+    if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] === '0') {
+      return;
+    }
+
+    grid[r][c] = '0';
+    this.dfs(grid, r - 1, c);
+    this.dfs(grid, r + 1, c);
+    this.dfs(grid, r, c - 1);
+    this.dfs(grid, r, c + 1);
+  }
+
+  numIslands(grid) {
+    if (!grid || grid.length === 0) {
+      return 0;
+    }
+
+    const nr = grid.length;
+    const nc = grid[0].length;
+    let numIslands = 0;
+
+    for (let r = 0; r < nr; ++r) {
+      for (let c = 0; c < nc; ++c) {
+        if (grid[r][c] === '1') {
+          numIslands++;
+          this.dfs(grid, r, c);
+        }
+      }
+    }
+
+    return numIslands;
+  }
+}
+
+
+
 
 
 
