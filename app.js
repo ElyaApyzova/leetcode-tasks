@@ -4065,6 +4065,36 @@ class Solution {
 }
 
 
+//202 https://leetcode.com/problems/happy-number/description/
+
+
+//Input: n = 2
+//Output: false
+
+
+function getNext(n) {
+  let totalSum = 0;
+  while (n > 0) {
+    let digit = n % 10;
+    n = Math.floor(n / 10);
+    totalSum += digit * digit;
+  }
+  return totalSum;
+}
+
+function isHappy(n) {
+  const seen = new Set();
+  while (n !== 1 && !seen.has(n)) {
+    seen.add(n);
+    n = getNext(n);
+  }
+  return n === 1;
+}
+
+console.log(isHappy(19));
+
+
+
 
 
 
