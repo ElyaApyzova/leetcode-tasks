@@ -4093,6 +4093,33 @@ function isHappy(n) {
 
 console.log(isHappy(19));
 
+//203 Remove Linked List Elements
+
+
+//Input: head = [1,2,6,3,4,5,6], val = 6
+//Output: [1,2,3,4,5]
+
+function ListNode(val, next = null) {
+  this.val = val;
+  this.next = next;
+}
+
+function deleteNode(head, value) {
+  let sentinel = new ListNode(0);
+  sentinel.next = head;
+  let prev = sentinel, curr = head;
+
+  while (curr !== null) {
+    if (curr.val === value) {
+      prev.next = curr.next;
+    } else {
+      prev = curr;
+    }
+    curr = curr.next;
+  }
+  return sentinel.next;
+}
+
 
 
 
