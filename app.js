@@ -4031,6 +4031,42 @@ class Solution {
 }
 
 
+//202 https://leetcode.com/problems/happy-number/description/
+
+//Input: n = 19
+//Output: true
+//Explanation:
+//12 + 92 = 82
+//82 + 22 = 68
+//62 + 82 = 100
+//12 + 02 + 02 = 1
+
+
+
+class Solution {
+  isHappy(n) {
+    function getNext(n) {
+      let totalSum = 0;
+      while (n > 0) {
+        let digit = n % 10;
+        totalSum += digit * digit;
+        n = Math.floor(n / 10);
+      }
+      return totalSum;
+    }
+
+    let seen = new Set();
+    while (n !== 1 && !seen.has(n)) {
+      seen.add(n);
+      n = getNext(n);
+    }
+    return n === 1;
+  }
+}
+
+
+
+
 
 
 
