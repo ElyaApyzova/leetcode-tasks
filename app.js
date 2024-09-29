@@ -4185,6 +4185,34 @@ class Solution {
 }
 
 
+//206 https://leetcode.com/problems/reverse-linked-list/
+
+
+// Input: head = [1,2,3,4,5]
+//Output: [5,4,3,2,1]
+
+
+function ListNode(val, next = null) {
+  this.val = val;
+  this.next = next;
+}
+
+class solution {
+  reverselist(head) {
+    let prev = null;
+    let curr = head;
+    while (curr !== null) {
+      let nextTemp = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = nextTemp;
+    }
+    return prev;
+  }
+}
+
+
+
 
 
 
