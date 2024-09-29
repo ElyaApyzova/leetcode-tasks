@@ -4121,6 +4121,39 @@ function deleteNode(head, value) {
 }
 
 
+//204 https://leetcode.com/problems/count-primes/description/
+
+
+//Input: n = 10
+//Output: 4
+//Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+
+
+class Solution {
+  countPrimes(n) {
+    if (n <= 2) {
+      return 0;
+    }
+
+    let numbers = new Array(n).fill(true);
+    for (let p = 2; p <= Math.sqrt(n); ++p) {
+      if (numbers[p]) {
+        for (let j = p * p; j < n; j += p) {
+          numbers[j] = false;
+        }
+      }
+    }
+
+    let numberOfPrimes = 0;
+    for (let i = 2; i < n; i++) {
+      if (numbers[i]) {
+        ++numberOfPrimes;
+      }
+    }
+
+    return numberOfPrimes;
+  }
+}
 
 
 
