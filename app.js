@@ -4156,6 +4156,36 @@ class Solution {
 }
 
 
+//205 Isomorphic Strings
+
+
+// Input: s = "egg", t = "add"
+//Output: true
+
+
+class Solution {
+  isIsomorphic(s, t) {
+    let mappingStoT = {};
+    let mappingTtoS = {};
+
+    for (let i = 0; i < s.length; i++) {
+      let c1 = s[i];
+      let c2 = t[i];
+
+      if (mappingStoT[c1] === undefined && mappingTtoS[c2] === undefined) {
+        mappingStoT[c1] = c2;
+        mappingTtoS[c2] = c1;
+      
+      } else if (mappingStoT[c1] !== c2 || mappingTtoS[c2] !== c1) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+
+
 
 
 
