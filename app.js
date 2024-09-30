@@ -4211,6 +4211,49 @@ class solution {
   }
 }
 
+//207 https://leetcode.com/problems/course-schedule/description/
+
+
+// Input: numCourses = 2, prerequisites = [[1,0]]
+//Output: true
+//Explanation: There are a total of 2 courses to take. 
+//To take course 1 you should have finished course 0. So it is possible.
+
+
+class Solution {
+  canFinish(numCourses, prerequisites) {
+    const indegree = new Array(numCourses).fill(0);
+    const adj = Array.from({ length: numCourses}, () => []);
+
+
+    for (const [a, b] of prerequisites) {
+      adj[b].push(a);
+      indegree[a]++;
+    }
+
+    const q = [];
+    for (let i = 0; i < numCourses; i++) {
+      if (indegree[i] === 0) {
+        q.push(i)
+      }
+    }
+
+    let nodesVisited = 0;
+    while (q.length > 0) {
+      const node = q.shift();
+      nodesVisited++;
+
+      for (const neighbor of adj[node]) {
+        indegree[neighbor]--;
+        if (indegree[neighbor] === 0) {
+          q.push(neighbor);
+        }
+      }
+    }
+
+    return nodesVisited === numCourses;
+  }
+}
 
 
 
