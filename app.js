@@ -4339,6 +4339,74 @@ class Trie {
 }
 
 
+//210 https://leetcode.com/problems/course-schedule-ii/description/
+
+
+//Input: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]
+//Output: [0,2,1,3]
+//Объяснение: Всего есть 4 курса, которые нужно пройти. Чтобы взять курс 3, вы должны завершить оба курса 1 и 2. Оба курса 1 и 2 должны быть взяты после того, как вы завершите курс 0.
+//Таким образом, один из правильных порядков курсов — [0,1,2,3]. Другой правильный порядок — [0,2,1,3].
+
+
+
+class Solution {
+  constructor() {
+    this.WHITE = 1;
+    this.GRAY = 2;
+    this.BLACK = 3;
+    this.isPossible = true;
+    this.color = new Map();
+    this.adjList = new Map();
+    this.topologicalOrder = [];
+  }
+
+  findOrder(numCourses, prerequisites) {
+    for (let i = 0; i < numCourses; i++) {
+      this.color.set(i, this.WHITE);
+    }
+
+    for (let [dest, src] of prerequisites) {
+      if (!this.adjList.has(src)) {
+        this.adjList.set(src, []);
+      }
+      this.adjList.get(src).push(dest);
+    }
+
+    for (let i = 0; i < numCourses && this.isPossible; i++) {
+      if (this.color.get(i) === this.WHITE) {
+        this.dfs(i);
+      }
+    }
+
+    if (this.isPossible) {
+      const order = new Array(numCourses);
+      for (let i = 0; i < numCourses; i++) {
+        order[i] = this.topologicalOrder[numCourses - i - 1];
+      }
+      return order;
+    } else {
+      return []
+    }
+  }
+  dfs(node) {
+    if (!this.isPossible) return;
+    this.color.set(node, this.GRAY);
+
+    if (this.adjList.has(node)) {
+      for (let neighbor of this.adjList.get(node)) {
+        if (this.color.get(neighbor) === this.WHITE) {
+          this.dfs(neighbor);
+        } else if (this.color.get(neighbor) === this.GRAY) {
+          this.isPossible = false;
+        }
+      }
+    }
+
+    this.color.set(node, this.BLACK);
+    this.topologicalOrder.push(node);
+  }
+}
+
 
 
 
