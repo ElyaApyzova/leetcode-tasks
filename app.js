@@ -4255,6 +4255,90 @@ class Solution {
   }
 }
 
+//208 https://leetcode.com/problems/implement-trie-prefix-tree/description/
+
+
+// Input
+//["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+//[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+//Output
+//[null, null, true, false, true, null, true]
+
+//Explanation
+//Trie trie = new Trie();
+//trie.insert("apple");
+//trie.search("apple");   // return True
+//trie.search("app");     // return False
+//trie.startsWith("app"); // return True
+//trie.insert("app");
+//trie.search("app");     // return True
+
+
+class TrieNode {
+  constructor() {
+    this.links = new Array(26).fill(null);
+    this.isEnd = false;
+  }
+
+  containsKey(ch) {
+    return this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)] !== null;
+  }
+
+  get(ch) {
+    return this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)];
+  }
+
+  put(ch, node) {
+    this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)] = node;
+  }
+
+  setEnd() {
+    this.isEnd = true;
+  }
+
+  isEndNode() {
+    return this.isEnd;
+  }
+}
+
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
+
+  insert(word) {
+    let node = this.root;
+    for (let ch of word) {
+      if (!node.containsKey(ch)) {
+        node.put(ch, new TrieNode());
+      }
+      node = node.get(ch);
+    }
+    node.setEnd();
+  }
+
+  searchPrefix(word) {
+    let node = this.root;
+    for (let ch of word) {
+      if (node.containsKey(ch)) {
+        node = node.get(ch);
+      } else {
+        return null;
+      }
+    }
+    return node;
+  }
+
+  search(word) {
+    let node = this.searchPrefix(word);
+    return node !== null && node.isEndNode();
+  }
+  startsWith(prefix) {
+    return this.searchPrefix(prefix) !== null;
+  }
+}
+
+
 
 
 
