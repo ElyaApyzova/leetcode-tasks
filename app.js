@@ -4409,7 +4409,7 @@ class Solution {
 
 
 
-//252 Meeting Rooms
+//252 https://leetcode.com/problems/meeting-rooms/description/
 
 //Input: intervals = [[0,30],[5,10],[15,20]]
 //Output: false
@@ -4430,6 +4430,30 @@ class Solution {
       }
     }
     return true;
+  }
+}
+
+
+
+//253 https://leetcode.com/problems/meeting-rooms-ii/description/
+
+//Input: intervals = [[0,30],[5,10],[15,20]]
+//Output: 2
+
+
+class Solution {
+  minMeetingRooms(intervals) {
+    intervals.sort((a, b) => a[0] - b[0])
+    const heap = [intervals[0][1]]
+
+    for (let i = 1; i < intervals.length; i++) {
+      if (intervals[i][0] >= heap[0]) {
+        heap.shift()
+      }
+      heap.push(intervals[i][1])
+      heap.sort((a, b) => a - b)
+    }
+    return heap.length
   }
 }
 
