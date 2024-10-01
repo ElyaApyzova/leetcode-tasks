@@ -4409,6 +4409,33 @@ class Solution {
 
 
 
+//252 Meeting Rooms
+
+//Input: intervals = [[0,30],[5,10],[15,20]]
+//Output: false
+
+
+class Solution {
+  overlap(interval1, interval2) {
+    return (interval1[0] >= interval2[0] && interval1[0] < interval2[1]) ||
+    (interval2[0] >= interval1[0] && interval2[0] < interval1[1]);
+  }
+
+  canAttendMeetings(intervals) {
+    for (let i = 0; i < intervals.length; i++) {
+      for (let j = i + 1; j < intervals.length; j++) {
+        if (this.overlap(intervals[i], intervals[j])) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+
+
+
+
 
 
 
