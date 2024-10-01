@@ -4458,6 +4458,41 @@ class Solution {
 }
 
 
+//254 https://leetcode.com/problems/factor-combinations/
+
+
+// Input: n = 1
+//Output: []
+
+
+class Solution {
+  backtracking(factors, ans) {
+    if (factors.length > 1) {
+      ans.push([...factors]);
+    }
+    const lastFactor = factors.pop();
+    const start = factors.length === 0 ? 2 : factors[factors.length - 1];
+
+    for (let i = start; i * i <= lastFactor; ++i) {
+      if (lastFactor % i === 0) {
+        factors.push(i, lastFactor / i);
+        this.backtracking(factors, ans);
+        factors.pop();
+        factors.pop();
+      }
+    }
+    factors.push(lastFactor);
+  }
+
+  getFactors(n) {
+    const ans = [];
+    this.backtracking([n], ans);
+    return ans;
+  }
+}
+
+
+
 
 
 
