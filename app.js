@@ -4521,6 +4521,74 @@ class Solution {
 }
 
 
+// 211 https://leetcode.com/problems/design-add-and-search-words-data-structure/description/
+
+
+// Input
+//["WordDictionary","addWord","addWord","addWord","search","search","search","search"]
+//[[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+//Output
+//[null,null,null,null,false,true,true,true]
+
+//Explanation
+//W//ordDictionary wordDictionary = new WordDictionary();
+//wordDictionary.addWord("bad");
+//wordDictionary.addWord("dad");
+//wordDictionary.addWord("mad");
+//wordDictionary.search("pad"); // return False
+//wordDictionary.search("bad"); // return True
+//wordDictionary.search(".ad"); // return True
+//wordDictionary.search("b.."); // return True
+
+
+class TrieNode {
+  constructor() {
+    this.children = new Map();
+    this.isWord = false;
+  }
+}
+
+class WordDictionary {
+  constructor() {
+    this.trie = new TrieNode();
+  }
+
+  addWord(word) {
+    let node = this.trie;
+    for (let ch of word) {
+      if (!node.children.has(ch)) {
+        node.children.set(ch, new TreeNode());
+      }
+      node = node.children.get(ch);
+    }
+    node.isWord = true;
+  }
+  searchInNode(word, node) {
+    for (let i = 0; i < word.length; i++) {
+      let ch = word[i];
+      if (!node.children.has(ch)) {
+        if (ch === '.') {
+          for (let child of node.children.values()) {
+            if (this.searchInNode(word.slice(i + 1), child)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      } else {
+        node = node.children.get(ch);
+      }
+    }
+    return node.isWord;
+  }
+
+  search(word) {
+    return this.searchInNode(word, this.trie);
+  }
+}
+
+
+
 
 
 
