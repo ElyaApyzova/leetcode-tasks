@@ -4492,6 +4492,36 @@ class Solution {
 }
 
 
+//255 https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
+
+
+// Input: preorder = [5,2,1,3,6]
+//Output: true
+
+
+class Solution {
+  verifyPreorder(preorder) {
+    let minLimit = -Infinity
+    const stack = []
+
+    for (const num of preorder) {
+      while (stack.length && stack[stack.length - 1] < num) {
+        minLimit = stack.pop()
+      }
+
+      if (num <= minLimit) {
+        return false
+      }
+
+      stack.push(num)
+    }
+
+    return true
+  }
+}
+
+
+
 
 
 
