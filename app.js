@@ -4588,6 +4588,38 @@ class WordDictionary {
 }
 
 
+//212 https://leetcode.com/problems/word-search-ii/description/
+
+
+// Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+//Output: ["eat","oath"]
+
+
+class TrieNode {
+  constructor() {
+    this.children = new Map();
+    this.word = null;
+  }
+}
+
+class Solution {
+  constructor() {
+    this.board = [];
+    this.result = [];
+  }
+
+  findWords(board, words) {
+    const root = this.buildTrie(words);
+    this.board = board;
+    for (let row = 0; row < board.len; ++row) {
+      for (let col = 0; col < board[0].length; ++col) {
+        if (root.children.has(board[row][col])) {
+          this.backtrack(row, col, root);
+        }
+      }
+    }
+  }
+}
 
 
 
