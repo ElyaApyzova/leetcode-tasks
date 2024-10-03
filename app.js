@@ -4618,8 +4618,66 @@ class Solution {
         }
       }
     }
+    return this.result;
+  }
+
+  buildTrie(words) {
+    const root = new TrieNode();
+    for (const word of words) {
+      let node = root;
+      for (const letter of word) {
+        if (!node.children.has(letter)) {
+          node.children.set(letter, new TreeNode());
+        }
+        node = node.children.get(letter);
+      }
+      node.word = word;
+    }
+    return root;
+  }
+
+  backtrack(row, col, parent) {
+    const letter = this.board[row][col];
+    const currNode = parent.children.get(letter);
+
+    if (currNode.word !== null) {
+      this.result.push(currNode.word);
+      currNode.word = null;
+    }
+
+    this.board[row][col] = '#';
+
+    const rowOffset = [-1, 0, 1, 0];
+    const colOffset = [0, 1, 0, -1];
+    for (let i = 0; i < 4; ++i) {
+      const newRow = row + rowOffset[i];
+      const newCol = col + colOffset[i];
+
+      if (newRow >= 0 && newRow < this.board.length && newCol >= 0 && newCol < this.board[0].length) {
+        if (currNode.children.has(this.board[newRow][newCol])) {
+          this.backtrack(newRow, newCol, currNode);
+        }
+      }
+    }
+
+    this.board[row][col] = letter;
+
+    if (currNode.children.size === 0) {
+      parent.children.delete(letter)
+    }
   }
 }
+
+const solution = new Solution();
+const board = [
+  ['o', 'a', 'a', 'n'],
+  ['e', 't', 'a', 'e'],
+  ['i', 'h', 'k', 'r'],
+  ['i', 'f', 'l', 'v']
+];
+
+const words = ["oath", "pea", "eat", "rain"];
+console.log(solution.findWords(board, words));  // Output: ["oath", "eat"]
 
 
 
