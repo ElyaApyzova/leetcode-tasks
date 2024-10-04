@@ -4730,6 +4730,29 @@ class Solution {
 }
 
 
+// 258 https://leetcode.com/problems/add-digits/
+
+
+// Input: num = 38
+//Output: 2
+//Explanation: The process is
+38 --> 3 + 8 --> 11
+11 --> 1 + 1 --> 2 
+//Since 2 has only one digit, return it.
+
+
+class Solution {
+  addDigits(num) {
+    let digital_root = 0
+    while (num > 0) {
+      digital_root += num % 10
+      num = Math.floor(num / 10)
+    }
+  }
+}
+
+
+
 
 
 
