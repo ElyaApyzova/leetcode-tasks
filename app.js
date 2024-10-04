@@ -4703,6 +4703,33 @@ class Solution {
   }
 }
 
+// 257 https://leetcode.com/problems/binary-tree-paths/
+
+//Input: root = [1,2,3,null,5]
+//Output: ["1->2->5","1->3"]
+
+
+class Solution {
+  constructPaths(root, path, paths) {
+    if (root !== null) {
+      path += root.val
+      if (root.left === null && root.right === null) {
+        paths.push(path)
+      } else {
+        path += "->"
+        this.constructPaths(root.left, path, paths)
+        this.constructPaths(root.right, path, paths)
+      }
+    }
+  }
+  binaryTreePaths(root) {
+    const paths = []
+    this.constructPaths(root, "", paths)
+    return paths
+  }
+}
+
+
 
 
 
