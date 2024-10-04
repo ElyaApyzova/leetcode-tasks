@@ -4751,8 +4751,54 @@ class Solution {
   }
 }
 
+//259 https://leetcode.com/problems/3sum-smaller/description/
+
+// Input: nums = [-2,0,1,3], target = 2
+//Output: 2
+//Explanation: Because there are two triplets which sums are less than 2:
+[-2,0,1]
+[-2,0,3]
 
 
+class Solution {
+  threeSumSmaller(nums, target) {
+    nums.sort((a, b) => a - b);
+    let count = 0;
+
+    for (let i = 0; i < nums.length - 2; i++) {
+      count += this.twoSumSmaller(nums, i + 1, target - nums[i]);
+    }
+    
+    return count;
+  }
+
+  twoSumSmaller(nums, startIndex, target) {
+    let count = 0;
+    let left = startIndex;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[left] + nums[right];
+
+      if (sum < target) {
+        // Все пары от left до right будут меньше, чем target
+        count += right - left;
+        left++; // Увеличиваем левый указатель, чтобы проверить следующую пару
+      } else {
+        // Если сумма больше или равна target, уменьшаем правый указатель
+        right--;
+      }
+    }
+
+    return count;
+  }
+}
+
+// Пример использования
+const solution = new Solution();
+const nums = [-2, 0, 1, 3];
+const target = 2;
+console.log(solution.threeSumSmaller(nums, target)); // Вывод: 2
 
 
 
