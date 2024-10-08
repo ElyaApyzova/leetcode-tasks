@@ -4869,6 +4869,34 @@ class Solution {
 }
 
 
+//263 https://leetcode.com/problems/ugly-number/
+
+//Input: n = 6
+//Output: true
+//Explanation: 6 = 2 × 3
+
+
+class Solution {
+  isUgly(n) {
+    if (n <= 0) {
+      return false
+    }
+    for (const factor of [2, 3, 5]) {
+      n = this.keepDividingWhenDivisible(n, factor)
+    }
+    return n === 1
+  }
+
+  keepDividingWhenDivisible(dividend, divisor) {
+    while (dividend % divisor === 0) {
+      dividend /= divisor
+    }
+    return dividend
+  }
+}
+
+
+
 
 
 
