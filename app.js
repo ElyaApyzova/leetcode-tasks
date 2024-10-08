@@ -4896,6 +4896,48 @@ class Solution {
 }
 
 
+//240 https://leetcode.com/problems/search-a-2d-matrix-ii/description/
+
+//Input: matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5
+//Output: true
+
+
+class Solution {
+  binarySearch(matrix, target, start, vertical) {
+    let lo = start;
+    let hi = vertical ? matrix[0].length - 1 : matrix.length - 1;
+
+
+    while (hi >= lo) {
+      let mid = Math.floor((lo + hi) / 2);
+      let value = vertical ? matrix[start][mid] : matrix[mid][start];
+      if (value < target) {
+        lo = mid + 1;
+      } else if (value > target) {
+        hi = mid - 1;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  searchMatrix(matrix, target) {
+    if (!matrix || matrix.length === 0) return false;
+
+    let shorterDim = Math.min(matrix.length, matrix[0].length);
+
+    for (let i = 0; i < shorterDim; i++) {
+      if (this.binarySearch(matrix, target, i, true) || this.binarySearch(matrix, target, i, false)) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+
+
 
 
 
