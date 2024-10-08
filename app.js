@@ -4829,6 +4829,46 @@ return res
 }
 
 
+//261 https://leetcode.com/problems/graph-valid-tree/
+
+//Input: n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]
+//Output: true
+
+class Solution {
+ validTree(n, edges) {
+  if (edges.length !== n - 1) {
+    return false;
+  }
+
+  const adjList = Array.from({ length: n }, () => []);
+
+  for (const [A, B] of edges) {
+    adjList[A].push(B);
+    adjList[B].push[A];
+  }
+
+  const parent = { 0: -1 };
+  const queue = [0];
+
+  while (queue.length) {
+    const node = queue.shift();
+    for (const neighbor of adjList[node]) {
+      if (neighbor === parent[node]) {
+        continue;
+      }
+
+      if (neighbor in parent) {
+        return false;
+      }
+      parent[neighbor] = node;
+      queue.push(neighbor);
+    }
+  }
+  return Object.keys(parent).length === n;
+ }
+}
+
+
 
 
 
